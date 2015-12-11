@@ -16,18 +16,27 @@ int * aggiungi_numero(int val, int n, int size, int *p){
 	return NULL;}
 
 int main(){
-	int *p,*new_p,i,c=0,size=1,val;
+	int disp=0,*p,*new_p,i,c=0,size=1,val;
 	do{
 	printf("Inserisci il numero da inserire nell'array: ");
 	scanf("%d", &val);
 	new_p=aggiungi_numero(val,c,size,p);
 	if(new_p!=NULL){
 		p=new_p;
+		free(new_p);
 		size=size*F;}
 	c++;
 	for(i=0;i<c;i++){
 		printf("%p --> %d\n",&p[i],p[i]);}
 	printf("SIZE: %i\n",size);
 	printf("DISPONIBILI: %i\n",size-c);
+	disp=size-c;
 	printf("\n");
-	}while(val!=0);}
+	}while(val!=0);
+	size=size-disp;
+	new_p=malloc(sizeof(int)*size);
+	for(i=0;i<size;i++){
+		new_p[i]=p[i];
+		printf("%p --> %d\n",new_p+i,new_p[i]);}
+	printf("\n");
+	}
