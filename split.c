@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX_LEN 100
 
@@ -39,16 +40,32 @@ int len(char* string,int* pos,char separatore){
 	return cont;
 	}
 
-void split(char* libro, char separatore){
-	int i=0,j=0,length,pos=i;
+int string_count(char* stringa, char separatore){
+	int i=0,contatore=0;
+	while(stringa[i]!='\0'){
+		if(stringa[i]==separatore){
+			contatore++;}
+		i++;	
+			}
+	return contatore+1;
+	}
+
+char** split(char* libro, char separatore,int l){
+	int i=0,j=0,k=0,length,pos=i;
 	char* parola;
+	char* parole[l];
+	for(i=0;i<l;i++)
+		parole[i]=malloc(MAX_LEN);
+	i=0;	
 	while(libro[i]!='\0'){
 		length=len(libro,&pos,separatore);
 		parola=malloc((sizeof(char)*length+1));
 		for(j=0;j<=length;j++,i++){
 			parola[j]=libro[i];}
-		print(parola);
+		parole[k]=parola;
+		k++;
 		}
+	return parole;
 	}
 
 void indicizza(char* libro){
@@ -57,6 +74,12 @@ void indicizza(char* libro){
 
 int main(){
 	char libro[MAX_LEN]="ciao a tutti come state bene e tu niente male grazie";
-	split(libro,' ');
+	char** a;
+	int i;
+	i=string_count(libro,' ');
+	printf("%d\n",i);
+	/*a=split(libro,' ',11);
+	for(i=0;i<11;i++)
+		printf("%s\n",a[i]);*/
 	return 0;
 	}
