@@ -53,7 +53,8 @@ int string_count(char* stringa, char separatore){
 char** split(char* libro, char separatore,int l){
 	int i=0,j=0,k=0,length,pos=i;
 	char* parola;
-	char* parole[l];
+	char** parole;
+	parole=malloc(l);
 	for(i=0;i<l;i++)
 		parole[i]=malloc(MAX_LEN);
 	i=0;	
@@ -68,18 +69,31 @@ char** split(char* libro, char separatore,int l){
 	return parole;
 	}
 
-void indicizza(char* libro){
-	
+void stampa_lista(struct nodo* head){
+	if (head->prossimo==NULL){
+		printf("%s\t(%d)\n",head->parola,head->contatore);
+		return;
+	}
+	printf("%s\t(%d)\n",head->parola,head->contatore);
+	stampa_lista(head->prossimo);
+}
+
+void indicizza(char* libro, int l){
+	char** string_array;
+	int i;
+	struct nodo* head;
+	head=NULL;
+	string_array=split(libro, ' ', l);
+	for(i=0;i<l;i++)
+		insert(string_array[i],&head);
+	stampa_lista(head);
 	}
 
 int main(){
-	char libro[MAX_LEN]="ciao a tutti come state bene e tu niente male grazie";
-	char** a;
+	char libro[MAX_LEN]="ciao a tutti ciao a tutti ciao a tutti quanti voi altri";
 	int i;
-	i=string_count(libro,' ');
-	printf("%d\n",i);
-	/*a=split(libro,' ',11);
-	for(i=0;i<11;i++)
-		printf("%s\n",a[i]);*/
+	int word_cnt;
+	word_cnt=string_count(libro,' ');
+	indicizza(libro,word_cnt);
 	return 0;
 	}
