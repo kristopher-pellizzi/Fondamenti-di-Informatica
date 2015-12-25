@@ -80,9 +80,6 @@ void stampa_m(int m[DIM][DIM]){
 int risolvi(int m[DIM][DIM]){
 	int* p;
 	int i;
-	printf("\n");
-	stampa_m(m);
-	printf("\n");
 	if(!corretto(m))
 		return 0;
 	if(prima_libera(m)==NULL)
