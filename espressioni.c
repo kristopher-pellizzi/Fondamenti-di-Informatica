@@ -34,10 +34,13 @@ int solve(char* expr){
 	return res;
 }
 
-int main(){
-	char expr[]="-243+20+1234+432-123454235+182738947";
+int main(int argc, char** argv){
 	int res=0;
-	res=solve(expr);
+	if(argv[1]=='\0'){
+		printf("Per eseguire il programma devi passare come parametro una stringa contenente un'espressione aritmetica\n");
+		return 0;
+	}
+	res=solve(argv[1]);
 	printf("%d\n",res);
 	return 0;
 }
