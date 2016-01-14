@@ -31,14 +31,17 @@ int anagramma(char* parola_a, char* parola_b){
 }
 
 int sostit(char* parola_a, char* parola_b){
-	int conta=0,i;
+	int conta=0,i=0,j=0;
 	int lung_a=len(parola_a);
 	int lung_b=len(parola_b);
 	if(lung_a!=lung_b)
 		return 0;
-	for(i=0;i<lung_a;i++)
-		if(!inside(parola_b[i],parola_a))
+	while(i<lung_a){
+		if(parola_b[i]!=parola_a[j])
 			conta++;
+		j++;
+		i++;
+	}
 	if(conta==1)
 		return 1;
 	return 0;
@@ -100,6 +103,6 @@ int controllo(char* parola_a, char* parola_b){
 }
 
 int main(){
-	printf("%d\n",controllo("ciao","aoic"));
+	printf("%d\n",controllo("ciao","casi"));
 	return 0;
 }
